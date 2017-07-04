@@ -3,9 +3,6 @@
 # How many games are in the file?
 # Expected name of the function: count_games(file_name)
 # Expected output of the function: a number
-import csv
-from tabulate import tabulate
-import re
 
 
 def count_games(file_name):
@@ -54,3 +51,8 @@ def get_latest(file_name):
         for title, sold, year, genre, publisher in game_list:
             if latest_year == year:
                 return title
+
+
+# How many games do we have by genre?
+# Expected name of the function: count_by_genre(file_name, genre)
+# Expected output of the function: a number
