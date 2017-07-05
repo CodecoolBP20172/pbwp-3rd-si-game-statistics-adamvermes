@@ -8,10 +8,9 @@
 def count_games(file_name):
     with open(file_name, 'r') as file:
         game_list = []
-        for line in file:
-            game_list.append(line)
-        num_of_games = (len(game_list))
-        return num_of_games
+        for strings in file:
+            game_list.append(strings.strip().split('\t'))
+        return len(game_list)
 
 
 # Is there a game from a given year?
@@ -22,13 +21,14 @@ def count_games(file_name):
 def decide(file_name, year):
     with open(file_name, 'r') as file:
         game_list = []
-        for row in file:
-            game_list.append(row)
-            game_list_string = ''.join(str(element) for element in game_list)
-            game_list_string_split = game_list_string.split()
-        if str(year) in game_list_string:
+        game_year_list = []
+        for strings in file:
+            game_list.append(strings.strip().split('\t'))
+        for game_title, sold, game_year, game_genre, publisher in game_list:
+            game_year_list.append(game_year)
+        if str(year) in game_year_list:
             return True
-        if str(year) not in game_list_string:
+        else:
             return False
 
 
@@ -45,8 +45,8 @@ def get_latest(file_name):
     with open(file_name) as file:
         for strings in file:
             game_list.append(strings.strip().split('\t'))
-        for title, sold, year, game_genre, publisher in game_list:
-            year_list.append(int(year))
+        for game_title, sold, game_year, game_genre, publisher in game_list:
+            year_list.append(int(game_year))
             year_list.sort(reverse=True)
             latest_year = str(year_list[0])
         for title, sold, year, genre, publisher in game_list:
@@ -65,7 +65,7 @@ def count_by_genre(file_name, genre):
     with open(file_name) as file:
         for strings in file:
             game_list.append(strings.strip().split('\t'))
-        for title, sold, year, game_genre, publisher in game_list:
+        for game_title, sold, game_year, game_genre, publisher in game_list:
             genre_list.append(game_genre)
         return genre_list.count(genre)
 
