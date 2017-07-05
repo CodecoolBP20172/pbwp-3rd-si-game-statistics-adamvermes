@@ -56,3 +56,13 @@ def get_latest(file_name):
 # How many games do we have by genre?
 # Expected name of the function: count_by_genre(file_name, genre)
 # Expected output of the function: a number
+
+def count_by_genre(file_name, genre):
+    game_list = []
+    genre_list = []
+    with open(file_name) as file:
+        for strings in file:
+            game_list.append(strings.split('\t'))
+        for title, sold, year, game_genre, publisher in game_list:
+            genre_list.append(game_genre)
+        return genre_list.count(genre)
