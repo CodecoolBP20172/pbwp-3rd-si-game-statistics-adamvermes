@@ -12,6 +12,7 @@ def get_most_played(file_name):
     games_sold_list = []
     games_sold_list_float = []
     max_list = []
+    answer_list = []
     with open(file_name) as file:
         for strings in file:
             game_list.append(strings.strip().split('\t'))
@@ -22,9 +23,11 @@ def get_most_played(file_name):
             max_list = max(games_sold_list_float)
             max_list = int(max_list)
             max_list = str(max_list)
-        for game_title, games_sold, game_year, game_genre, game_publisher in game_list:
-            if max_list == games_sold:
-                return game_title
+        if max_list in games_sold_list:
+            game_index = games_sold_list.index(max_list)
+            return game_list[game_index][0]
+
+
 
 
 # How many copies have been sold total?
@@ -132,5 +135,5 @@ def get_game(file_name, title):
             game_index = game_properties_list.index(title)
         answer_int = game_list[game_index]
         answer_int[1] = float(answer_int[1])
-        answer_int[2] = int(answer_int[2])
+        answer_int[2] = float(answer_int[2])
         return answer_int
