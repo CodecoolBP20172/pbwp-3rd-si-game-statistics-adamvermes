@@ -49,3 +49,21 @@ def sum_sold(file_name):
 # What is the average selling?
 # Expected name of the function: get_selling_avg(file_name)
 # Expected output of the function: (number)
+
+
+def get_selling_avg(file_name):
+    game_list = []
+    games_sold_list = []
+    games_sold_list_float = []
+    games_sold_list_total = []
+    avg = []
+    with open(file_name) as file:
+        for strings in file:
+            game_list.append(strings.strip().split('\t'))
+        for game_title, games_sold, game_year, game_genre, game_publisher in game_list:
+            games_sold_list.append(games_sold)
+        for numbers in games_sold_list:
+            games_sold_list_float.append(float(numbers))
+        games_sold_list_total = sum(games_sold_list_float)
+        avg = games_sold_list_total / len(game_list)
+        return avg
