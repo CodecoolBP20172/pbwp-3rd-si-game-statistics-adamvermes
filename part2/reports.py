@@ -96,4 +96,18 @@ def count_longest_title(file_name):
 # Other expectation: the return value must be the rounded up average
 
 def get_date_avg(file_name):
-    
+    game_list = []
+    game_year_list = []
+    game_year_list_int = []
+    game_year_list_total = []
+    avg = []
+    with open(file_name) as file:
+        for strings in file:
+            game_list.append(strings.strip().split('\t'))
+        for game_title, games_sold, game_year, game_genre, game_publisher in game_list:
+            game_year_list.append(game_year)
+        for numbers in game_year_list:
+            game_year_list_int.append(int(numbers))
+        game_year_list_total = sum(game_year_list_int)
+        avg = round(game_year_list_total / len(game_year_list))
+        return avg
